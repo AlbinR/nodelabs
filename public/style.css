@@ -4,10 +4,11 @@
   text-decoration: none;
   /* list-style: none; */
 
-  color: rgb(0, 145, 255);
-  background-color: rgb(26, 26, 26);
+  color: black;
+  background-color: white;
 }
 
-h1 {
+h1,
+ol {
   text-align: center;
 }
