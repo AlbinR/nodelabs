@@ -1,11 +1,11 @@
 {
   "name": "nodelabs",
   "version": "1.0.0",
-  "description": "node and express assignment",
-  "main": "index.js",
+  "description": "KYH: node and express assignment",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx nodemon server.js"
+    "test": "mocha --reporter spec",
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,10 @@
   },
   "homepage": "https://github.com/AlbinR/nodelabs#readme",
   "dependencies": {
+    "chai": "^4.3.4",
     "express": "^4.17.1",
+    "mocha": "^8.4.0",
+    "request": "^2.88.2",
     "twilio": "^3.63.0"
   },
   "devDependencies": {

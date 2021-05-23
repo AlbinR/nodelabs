@@ -27,9 +27,12 @@ app.get("/api/custom_random/num", function (req, res) {
 
 // Lab 2
 //--------------------------------------------------
-// Counter storage
+// Get amount
 app.get("/api/count", function (req, res) {
-  fs.readFile("./data/counter.txt", function (data) {
+  fs.readFile("./data/counter.txt", function (err, data) {
+    if (err) {
+      console.log(err);
+    }
     const countAmount = Number(data);
     res.json({ counter: countAmount });
   });
@@ -37,13 +40,16 @@ app.get("/api/count", function (req, res) {
 
 // Counter increase
 app.get("/api/increase", function (req, res) {
-  fs.readFile("./data/counter.txt", function (data) {
+  fs.readFile("./data/counter.txt", function (err, data) {
+    if (err) {
+      console.log(err);
+    }
     const currentCount = Number(data);
-    countIncrease = (Number(data) ++).toString();
-    console.log("count has increased by", countIncrease);
+    countIncreased = (Number(data) + 1).toString();
+    console.log("count has increased to", countIncreased);
 
-    fs.writeFile("./data/counter.txt", countIncrease, function () {
-      res.json({ countAmount: currentCount, counter: Number(countIncrease) });
+    fs.writeFile("./data/counter.txt", countIncreased, function () {
+      res.json({ oldcount: currentCount, newcount: Number(countIncreased) });
     });
   });
 });
