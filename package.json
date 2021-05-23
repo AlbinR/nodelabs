@@ -4,16 +4,17 @@
   "description": "node and express assignment",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx nodemon server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AlbinR/nodelabs.git"
   },
   "keywords": [
-    "server"
+    "api"
   ],
-  "author": "Albin",
+  "author": "AlbinR",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/AlbinR/nodelabs/issues"

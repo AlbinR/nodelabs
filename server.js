@@ -1,10 +1,15 @@
+// Using express
 const express = require("express");
 const app = express();
+const fs = require("fs");
+// Set the port
 const port = 3000;
 
 // Serve static files in public
 app.use(express.static("public"));
 
+// Lab 1
+//--------------------------------------------------
 // Random function
 app.get("/api/random", function (req, res) {
   const random = Math.floor(Math.random() * 1023);
@@ -12,13 +17,77 @@ app.get("/api/random", function (req, res) {
 });
 
 // Custom random function
+app.get("/api/custom_random/num", function (req, res) {
+  let num = req.params.num;
+
+  const customRandom = Math.floor(Math.random() * num);
+
+  res.json({ number: customRandom });
+});
+
+// Lab 2
+//--------------------------------------------------
+// Counter storage
+app.get("/api/count", function (req, res) {
+  fs.readFile("./data/counter.txt", function (data) {
+    const countAmount = Number(data);
+    res.json({ counter: countAmount });
+  });
+});
+
+// Counter increase
+app.get("/api/increase", function (req, res) {
+  fs.readFile("./data/counter.txt", function (data) {
+    const currentCount = Number(data);
+    countIncrease = (Number(data) ++).toString();
+    console.log("count has increased by", countIncrease);
+
+    fs.writeFile("./data/counter.txt", countIncrease, function () {
+      res.json({ countAmount: currentCount, counter: Number(countIncrease) });
+    });
+  });
+});
 
 // App is listening to the webserver
 app.listen(port, function () {
-  console.log("server listening to port", port);
+  console.log("app listening to port", port);
 });
 
 /* 
 Sources: 
 https://expressjs.com/
+https://github.com/juiceghost/express-trainer
+
+Attempt without express:
+----------------------------------------------
+
+const http = require("http");
+
+const fs = require("fs");
+
+const port = 3000;
+
+const server = http.createServer(function (req, res) {
+  res.writeHead(200, { "Content-Type": "text/html" });
+  fs.readFile("index.html", function (error, data) {
+    if (error) {
+      res.writeHead(404);
+      res.write("Error: file Not Found");
+    } else {
+      res.write(data);
+    }
+    res.end();
+  });
+  res.write("Hello Node");
+});
+
+server.listen(port, function (error) {
+  if (error) {
+    console.log("Something went wrong", error);
+  } else {
+    console.log("server is listening on port ", port);
+  }
+});
+
+
 */
