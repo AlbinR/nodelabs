@@ -1,4 +1,4 @@
-// Using express
+// Packages
 const express = require("express");
 const app = express();
 const fs = require("fs");
@@ -17,7 +17,7 @@ app.get("/api/random", function (req, res) {
 });
 
 // Custom random function
-app.get("/api/custom_random/num", function (req, res) {
+app.get("/api/custom_random/:num", function (req, res) {
   let num = req.params.num;
 
   const customRandom = Math.floor(Math.random() * num);
@@ -28,7 +28,7 @@ app.get("/api/custom_random/num", function (req, res) {
 // Lab 2
 //--------------------------------------------------
 // Get amount
-app.get("/api/count", function (req, res) {
+app.get("/api/show", function (req, res) {
   fs.readFile("./data/counter.txt", function (err, data) {
     if (err) {
       console.log(err);
@@ -38,15 +38,14 @@ app.get("/api/count", function (req, res) {
   });
 });
 
-// Counter increase
-app.get("/api/increase", function (req, res) {
+// Add 1 to amount
+app.get("/api/add", function (req, res) {
   fs.readFile("./data/counter.txt", function (err, data) {
     if (err) {
       console.log(err);
     }
     const currentCount = Number(data);
     countIncreased = (Number(data) + 1).toString();
-    console.log("count has increased to", countIncreased);
 
     fs.writeFile("./data/counter.txt", countIncreased, function () {
       res.json({ oldcount: currentCount, newcount: Number(countIncreased) });
@@ -64,7 +63,7 @@ Sources:
 https://expressjs.com/
 https://github.com/juiceghost/express-trainer
 
-Attempt without express:
+First attempt:
 ----------------------------------------------
 
 const http = require("http");

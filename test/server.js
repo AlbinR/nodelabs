@@ -1,12 +1,77 @@
 var expect = require("chai").expect;
 var request = require("request");
 
-describe("random", function () {
-  var url = "localhost:3000/api/random";
+// Labb 1 random
+describe("Random", function () {
+  let url = "http://localhost:3000/api/random";
 
-  it("Should show an integer 0 - 1023", function (done) {
+  it("returns status 200", function (done) {
+    request(url, function (error, response, body) {
+      expect(response.statusCode).to.equal(200);
+      done();
+    });
+  });
+
+  it("generates a random number between 0 and 1023", function (done) {
     request(url, function (error, response, body) {
       expect(JSON.parse(response.body).number).to.be.within(0, 1023);
+      done();
+    });
+  });
+});
+
+// Labb 1 custom random
+describe("Custom random", function () {
+  let url = "http://localhost:3000/api/custom_random/:num";
+
+  it("returns status 200", function (done) {
+    request(url, function (error, response, body) {
+      expect(response.statusCode).to.equal(200);
+      done();
+    });
+  });
+
+  it("generates a random number between 0 and num", function (done) {
+    request(url, function (error, response, body) {
+      expect(JSON.parse(response.body).number).to.be.within(0, 100);
+      done();
+    });
+  });
+});
+
+//Labb 2 Show
+describe("Show", function () {
+  let url = "http://localhost:3000/api/show";
+
+  it("returns status 200", function (done) {
+    request(url, function (error, response, body) {
+      expect(response.statusCode).to.equal(200);
+      done();
+    });
+  });
+
+  it("shows stored number", function (done) {
+    request(url, function (error, response, body) {
+      expect(JSON.parse(response.body).number);
+      done();
+    });
+  });
+});
+
+// Labb 2 Add
+describe("Add", function () {
+  let url = "http://localhost:3000/api/add";
+
+  it("returns status 200", function (done) {
+    request(url, function (error, response, body) {
+      expect(response.statusCode).to.equal(200);
+      done();
+    });
+  });
+
+  it("shows stored number and the increase", function (done) {
+    request(url, function (error, response, body) {
+      expect(res.body.counter).to.equals(res.body.countBeforeAdd + 1);
       done();
     });
   });
