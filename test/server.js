@@ -40,6 +40,8 @@ describe("Custom random", function () {
 });
 
 //Labb 2 Show
+
+// These tests are not done. They should check for a number not an object
 describe("Show", function () {
   let url = "http://localhost:3000/api/show";
 
@@ -76,3 +78,10 @@ describe("Add", function () {
     });
   });
 });
+
+// Sources:
+/*
+https://mochajs.org/  
+https://github.com/juiceghost/mocha-test
+https://semaphoreci.com/community/tutorials/getting-started-with-node-js-and-mocha
+*/
