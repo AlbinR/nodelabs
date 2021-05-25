@@ -1,5 +1,6 @@
 var expect = require("chai").expect;
 var request = require("request");
+const fs = require("fs");
 
 // Labb 1 random
 describe("Random", function () {
@@ -22,8 +23,7 @@ describe("Random", function () {
 
 // Labb 1 custom random
 describe("Custom random", function () {
-  let url = "http://localhost:3000/api/custom_random/:num";
-
+  let url = "http://localhost:3000/api/custom_random/10000";
   it("returns status 200", function (done) {
     request(url, function (error, response, body) {
       expect(response.statusCode).to.equal(200);
@@ -33,7 +33,7 @@ describe("Custom random", function () {
 
   it("generates a random number between 0 and num", function (done) {
     request(url, function (error, response, body) {
-      expect(JSON.parse(response.body).number).to.be.within(0, 100);
+      expect(JSON.parse(response.body).number).to.be.within(0, 10000);
       done();
     });
   });
@@ -52,7 +52,7 @@ describe("Show", function () {
 
   it("shows stored number", function (done) {
     request(url, function (error, response, body) {
-      expect(JSON.parse(response.body).number);
+      expect(JSON.parse(response.body)).to.be.a("object");
       done();
     });
   });
@@ -71,7 +71,7 @@ describe("Add", function () {
 
   it("shows stored number and the increase", function (done) {
     request(url, function (error, response, body) {
-      expect(res.body.counter).to.equals(res.body.countBeforeAdd + 1);
+      expect(JSON.parse(response.body)).to.be.a("object");
       done();
     });
   });
