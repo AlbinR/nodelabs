@@ -55,6 +55,7 @@ describe("Show", function () {
   it("shows stored number", function (done) {
     request(url, function (error, response, body) {
       expect(JSON.parse(response.body)).to.be.a("object");
+      expect(JSON.parse(response.body).counter).to.be.a("number");
       done();
     });
   });

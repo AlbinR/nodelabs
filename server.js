@@ -21,12 +21,12 @@ app.get("/api/random", function (req, res) {
 
 // Custom random function
 app.get("/api/custom_random/:num", function (req, res) {
-  // Put the input in a variable
+  // Put the url input in a variable
   let num = req.params.num;
   // The math to generate a random number between 0 and num
   const customRandom = Math.floor(Math.random() * num);
   //The random number in json response
-  res.json({ number: customRandom });
+  res.send({ number: customRandom });
 });
 
 // Lab 2
